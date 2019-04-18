@@ -1,8 +1,9 @@
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 import json
 import os
+import tweet2vec
 
-IN_PATH = 'tweets_tokenized'
+IN_PATH = 'tweets_tidy'
 MODEL_PATH = 'models'
 
 if __name__ == '__main__':
@@ -20,7 +21,7 @@ if __name__ == '__main__':
             print('Processing tweets in file ' + in_filename + '...')
 
             for tweet in tweets_json['tweets']:
-                tokens = tweet['text_tokenized']
+                tokens = tweet2vec.tokenize(tweet['text'])
                 document = TaggedDocument(tokens, [str(tweet['id'])])
                 documents.append(document)
 
