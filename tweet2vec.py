@@ -24,6 +24,8 @@ class Doc2Vec():
 
     def vectorize(self, tweet_text):
         tokens = tokenize(tweet_text)
+        if len(tokens) == 0:
+            raise ValueError('zero tokens')
         return self.model.infer_vector(tokens)
 
 
@@ -33,6 +35,8 @@ class Word2Vec():
 
     def vectorize(self, tweet_text):
         tokens = tokenize(tweet_text)
+        if len(tokens) == 0:
+            raise ValueError('zero tokens')
         total = np.zeros(self.model.vector_size)
         for token in tokens:
             total += self.model.wv[token]
